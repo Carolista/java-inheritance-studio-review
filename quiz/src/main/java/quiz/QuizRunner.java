@@ -22,7 +22,7 @@ public class QuizRunner {
         };
         TrueFalse question2 = new TrueFalse(q2, q2Choices);
 
-        String q3 = "Which poem did history-making poet Amanda Gorman recite at the U.S. presidential inauguration in 2020?";
+        String q3 = "Which poem did history-making poet Amanda Gorman recite at the U.S. presidential inauguration in 2021?";
         Choice[] q3Choices = new Choice[] {
                 new Choice("The Hill We Climb", true),
                 new Choice("The Miracle of Morning"),
