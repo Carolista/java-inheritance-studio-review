@@ -2,40 +2,45 @@ package quiz;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public abstract class Question {
 
-    private static int nextId = 1;
-
-    private final int id;
     private final String question;
-    private final ArrayList<String> choices = new ArrayList<>();
+    private HashMap<Integer, Choice> choiceMap;
 
-    public Question(String question, String[] choices) {
-        this.id = nextId;
+    public Question(String question, Choice[] choiceArray) {
         this.question = question;
-        Collections.addAll(this.choices, choices);
-        nextId++;
+        createRandomizedChoiceMap(choiceArray);
     }
 
     public String getQuestion() {
         return question;
     }
 
-    public ArrayList<String> getChoices() {
-        return choices;
+    public HashMap<Integer, Choice> getChoiceMap() {
+        return choiceMap;
     }
 
     @Override
     public abstract String toString();
 
-    String getRandomizedChoices() {
+    void createRandomizedChoiceMap(Choice[] choiceArray) {
+        choiceMap = new HashMap<>();
+        ArrayList<Choice> choiceList = new ArrayList<>();
+        Collections.addAll(choiceList, choiceArray);
+        Collections.shuffle(choiceList);
+        for (int i=0; i < choiceList.size(); i++) {
+            choiceMap.put(i+1, choiceList.get(i));
+        }
+    }
+
+    String getFormattedChoices() {
         StringBuilder formattedChoices = new StringBuilder();
-        Collections.shuffle(choices);
-        for (int i=1; i <= choices.size(); i++) {
-            formattedChoices.append(i).append(" - ").append(choices.get(i));
+        for (int choiceNum : choiceMap.keySet()) {
+            String choice = "\t" + choiceNum + " - " + choiceMap.get(choiceNum).getContent() + "\n";
+            formattedChoices.append(choice);
         }
         return formattedChoices.toString();
     }
-
 }
