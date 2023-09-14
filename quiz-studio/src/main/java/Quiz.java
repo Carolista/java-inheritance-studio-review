@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 
+// For use with Checkbox, MultipleChoice, and TrueFalse
+
 public class Quiz {
 
     private final ArrayList<Question> questions = new ArrayList<>();
